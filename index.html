@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>هم‌صدا | اتاق گفت‌وگوی مستقیم</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2c;--panel2:#182238;--line:#29354d;--text:#edf2ff;--muted:#9ba9c4;--accent:#7c6cff;--green:#35c99a;--red:#ff657a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#182344 0,#0b1020 55%);color:var(--text);font-family:Vazirmatn, Tahoma, sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 15px;background:var(--accent);color:white;font-weight:700;transition:.15s}button:hover{filter:brightness(1.12)}button:disabled{opacity:.45;cursor:not-allowed}
+.secondary{background:#27334c}.danger{background:#9e3045}.success{background:#137c67}.shell{max-width:1100px;margin:auto;padding:22px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#8c7bff,#4b8dff);font-size:24px;box-shadow:0 8px 30px #6257e944}.brand h1{font-size:22px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.status{font-size:12px;color:var(--muted);background:#141e31;border:1px solid var(--line);padding:8px 11px;border-radius:99px;white-space:nowrap}
+.layout{display:grid;grid-template-columns: minmax(0,1.55fr) minmax(280px,.85fr);gap:16px}.card{background:#111a2bdc;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 15px 45px #0002}.card h2{font-size:17px;margin:0 0 13px}.intro{margin-bottom:16px}.intro p{color:var(--muted);line-height:1.9;margin:0;font-size:14px}
+.field{display:flex;gap:8px;flex-wrap:wrap}.field input{flex:1;min-width:130px;background:#0b1221;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);outline:none}.field input:focus{border-color:var(--accent)}
+.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.hint{font-size:12px;color:var(--muted);line-height:1.8;margin-top:10px}.roomline{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:12px}.roomline strong{font-size:14px}.pill{border:1px solid var(--line);padding:5px 9px;border-radius:99px;color:var(--muted);font-size:12px}
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.video-wrap{position:relative;background:#070b13;border:1px solid var(--line);border-radius:15px;overflow:hidden;aspect-ratio:16/10;display:grid;place-items:center}.video-wrap video{width:100%;height:100%;object-fit:cover}.video-wrap .placeholder{position:absolute;color:#9ba9c4;font-size:13px;pointer-events:none}.video-label{position:absolute;bottom:8px;right:8px;background:#080d18d9;padding:4px 8px;border-radius:7px;font-size:11px}
+.controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:13px}.controls button{min-width:48px}.control-off{background:#38445b}.messages{height:240px;overflow:auto;background:#0b1221;border:1px solid var(--line);border-radius:13px;padding:10px;display:flex;flex-direction:column;gap:8px}.msg{max-width:95%;background:#202b43;padding:8px 11px;border-radius:12px;align-self:flex-start;overflow-wrap:anywhere;font-size:13px;line-height:1.7}.msg.mine{background:#493f91;align-self:flex-end}.msg small{display:block;color:#bdc6da;font-size:10px}.chat-form{display:flex;gap:7px;margin-top:9px}.chat-form input{min-width:0;flex:1;background:#0b1221;border:1px solid var(--line);border-radius:11px;padding:10px;color:var(--text)}
+.file-button{display:inline-flex;align-items:center;gap:6px;background:#27334c;border-radius:11px;padding:9px 12px;font-size:13px;cursor:pointer}.file-button input{display:none}.file-list{font-size:12px;color:var(--muted);margin-top:8px}.notice{padding:10px 12px;border-radius:12px;background:#17253a;border:1px solid #2b4261;color:#c8d7f2;font-size:12px;line-height:1.8;margin-top:12px}.notice.warn{border-color:#7b5a27;background:#2a2115;color:#ffe0a4}.hidden{display:none!important}footer{text-align:center;color:#7888a5;font-size:11px;margin:18px 0 4px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.shell{padding:14px}.card{padding:14px}.brand h1{font-size:19px}.video-grid{gap:7px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header><div class="brand"><div class="logo">♫</div><div><h1>هم‌صدا</h1><p>اتاق خصوصی، ارتباط با Supabase</p></div></div><div id="connectionStatus" class="status">آمادهٔ شروع</div></header>
+<div class="card intro"><h2>اتاقت را بساز و لینک دعوت را بفرست</h2><p>یک اتاق دو نفره بساز، لینک را برای دوستت بفرست و پس از ورود او تماس بگیرید. پیام‌ها، صدا و تصویر تا حد امکان مستقیم بین دو دستگاه منتقل می‌شوند.</p></div>
+<div class="layout">
+<main class="card">
+<div class="roomline"><h2>اتاق تماس</h2><span id="roomBadge" class="pill">هنوز وارد اتاق نشده‌ای</span></div>
+<div id="joinPanel">
+<div class="field"><input id="nameInput" maxlength="30" placeholder="اسم نمایشی تو" autocomplete="nickname"><input id="roomInput" maxlength="48" placeholder="کد اتاق (برای پیوستن)"></div>
+<div class="row"><button id="createBtn">＋ ساخت اتاق جدید</button><button id="joinBtn" class="secondary">پیوستن به اتاق</button></div>
+<div class="hint">اگر لینکی برایت فرستاده‌اند، بازش کن یا کد اتاق را اینجا وارد کن. میکروفون و دوربین فقط با اجازهٔ خودت فعال می‌شوند.</div>
+</div>
+<div id="activePanel" class="hidden">
+<div class="roomline"><strong id="roomTitle">اتاق</strong><button id="copyBtn" class="secondary">کپی لینک دعوت</button></div>
+<div class="video-grid">
+<div class="video-wrap"><video id="localVideo" autoplay playsinline muted></video><span id="localPlaceholder" class="placeholder">تصویر تو (دوربین را روشن کن)</span><span class="video-label">شما</span></div>
+<div class="video-wrap"><video id="remoteVideo" autoplay playsinline></video><span id="remotePlaceholder" class="placeholder">منتظر دوستت...</span><span class="video-label">دوستت</span></div>
+</div>
+<div class="controls">
+<button id="micBtn" class="control-off" disabled>🎙 میکروفون</button>
+<button id="cameraBtn" class="control-off" disabled>📷 دوربین</button>
+<button id="screenBtn" class="secondary" disabled>▣ اشتراک صفحه</button>
+<button id="leaveBtn" class="danger">خروج از اتاق</button>
+</div>
+<div class="notice" id="callNotice">لینک دعوت را برای دوستت بفرست. وقتی وارد شود، برنامه تلاش می‌کند اتصال مستقیم برقرار کند.</div>
+</div>
+</main>
+<aside class="card">
+<h2>چت و ارسال فایل</h2>
+<div id="messages" class="messages"><div class="msg">به هم‌صدا خوش آمدی. بعد از پیوستن هر دو نفر، چت فعال می‌شود.</div></div>
+<form id="chatForm" class="chat-form"><input id="chatInput" maxlength="2000" placeholder="پیام بنویس..." disabled><button id="sendBtn" disabled>ارسال</button></form>
+<div class="row"><label class="file-button">＋ ارسال عکس یا فایل<input id="fileInput" type="file" disabled></label></div>
+<div id="fileList" class="file-list"></div>
+<div class="notice warn">نکته: برای ارتباط از اینترنت‌های مختلف، این برنامه به سرور هماهنگ‌سازی نیاز دارد و ممکن است به STUN/TURN هم نیاز شود. این نسخه برای اجرای آزمایشی است؛ برای کارکردن این نسخه باید اطلاعات پروژهٔ Supabase را در فایل تنظیم کنی و سایت را روی HTTPS منتشر کنی. کیفیت تماس به دسترسی شبکه و نیاز احتمالی به TURN بستگی دارد.</div>
+</aside>
+</div>
+<footer>هم‌صدا • نسخهٔ آزمایشی قابل اجرا • برای تماس، اجازهٔ میکروفون/دوربین را بده</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const status = $("connectionStatus");
+let sbChannel=null, pc=null, dc=null, localStream=null, screenStream=null, screenTrack=null;
+const clientId = (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)+Date.now());
+// Set these two values from Supabase Dashboard > Project Settings > API.
+const SUPABASE_URL = "https://gdhbaldfpsqdwtpbnefb.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_KPvEZDveFz6bo_-H1Sr5hQ_uNgx_I6B";
+let supabaseClient = null;
+let room="", name="", initiator=false, joined=false, remoteReady=false;
+let pendingCandidates=[], makingOffer=false, ignoreOffer=false, isSettingRemoteAnswerPending=false;
+let fileReceive=null, fileSendId=0;
+const chunkSize=16*1024;
+// STUN is only a discovery helper; some networks require a TURN server.
+const ICE_SERVERS = [{urls:"stun:stun.l.google.com:19302"}];
+function setStatus(t){status.textContent=t}
+function roomLink(){const u=new URL(location.href);u.searchParams.set("room",room);return u.toString()}
+function sendSignal(obj){
+ if(!sbChannel||!joined)return;
+ sbChannel.send({type:"broadcast",event:"signal",payload:{...obj,sender:clientId}}).catch(err=>console.warn("Supabase broadcast failed",err));
+}
+function addMsg(text, who, mine=false, link=null){
+ const div=document.createElement("div");div.className="msg"+(mine?" mine":"");
+ const small=document.createElement("small");small.textContent=who;div.appendChild(small);
+ if(link){const a=document.createElement("a");a.href=link;a.download=text;a.textContent=text;a.style.color="#c9c1ff";div.appendChild(a)}
+ else {const span=document.createElement("span");span.textContent=text;div.appendChild(span)}
+ $("messages").appendChild(div);$("messages").scrollTop=$("messages").scrollHeight;
+}
+function setControls(on){["micBtn","cameraBtn","screenBtn","chatInput","sendBtn","fileInput"].forEach(id=>$(id).disabled=!on)}
+function randomRoom(){return Math.random().toString(36).slice(2,8).toUpperCase()}
+function showActive(){
+ $("joinPanel").classList.add("hidden");$("activePanel").classList.remove("hidden");
+ $("roomTitle").textContent="اتاق "+room;$("roomBadge").textContent="کد: "+room;
+}
+async function connectRoom(roomId){
+ room=String(roomId||"").replace(/[^a-zA-Z0-9_-]/g,"").slice(0,48);
+ if(!room){alert("کد اتاق معتبر نیست.");return}
+ if(!window.supabase?.createClient){alert("کتابخانهٔ Supabase بارگذاری نشد. اتصال اینترنت و مسدود نبودن CDN را بررسی کن.");return}
+ if(SUPABASE_URL.includes("PASTE_YOUR_")||SUPABASE_ANON_KEY.includes("PASTE_YOUR_")){
+  alert("ابتدا فایل index.html را باز کن و SUPABASE_URL و SUPABASE_ANON_KEY را با اطلاعات پروژهٔ خودت از Supabase جایگزین کن. راهنما در README-FA.txt است.");return;
+ }
+ if(joined)return;
+ name=($("nameInput").value.trim()||"کاربر");$("nameInput").value=name;
+ try{
+  supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  setStatus("در حال اتصال به Supabase...");
+  sbChannel=supabaseClient.channel("hamseda-room-"+room,{config:{broadcast:{self:false},presence:{key:clientId}}});
+  sbChannel.on("broadcast",{event:"signal"},async({payload})=>{
+   if(!payload||payload.sender===clientId)return;
+   const m=payload;
+   if(m.type==="offer"||m.type==="answer") await onDescription(m);
+   if(m.type==="ice") await onIce(m);
+  });
+  sbChannel.on("presence",{event:"sync"},async()=>{
+   if(!sbChannel||!joined)return;
+   const state=sbChannel.presenceState();
+   const members=Object.values(state).flat().filter(p=>p&&p.clientId);
+   const ids=[...new Set(members.map(p=>p.clientId))].sort();
+   if(ids.length>2){
+    setStatus("اتاق پر است");alert("این اتاق پر است؛ در این نسخه فقط دو نفر می‌توانند وارد شوند.");
+    joined=false;await sbChannel.untrack();await supabaseClient.removeChannel(sbChannel);sbChannel=null;location.href=location.pathname;return;
+   }
+   initiator=ids[0]===clientId;
+   const hasPeer=ids.some(id=>id!==clientId);
+   if(hasPeer&&!remoteReady){
+    remoteReady=true;setStatus("دوستت وارد اتاق شد");$("callNotice").textContent="دوستت وارد شد؛ در حال برقراری ارتباط...";await startPeer();
+   }else if(!hasPeer&&remoteReady){
+    remoteReady=false;setStatus("دوستت از اتاق خارج شد");$("remoteVideo").srcObject=null;$("remotePlaceholder").classList.remove("hidden");$("callNotice").textContent="دوستت خارج شد. می‌توانی لینک را دوباره بفرستی.";
+    if(dc){try{dc.close()}catch{}dc=null}if(pc){try{pc.close()}catch{}pc=null}setControls(false);
+   }else if(!hasPeer){$("callNotice").textContent="لینک دعوت را برای دوستت بفرست. منتظر ورود او هستیم.";}
+  });
+  const result=await new Promise((resolve,reject)=>{
+   let settled=false;
+   const timer=setTimeout(()=>{if(!settled){settled=true;reject(new Error("timeout"))}},15000);
+   sbChannel.subscribe(async state=>{
+    if(state==="SUBSCRIBED"&&!settled){
+     try{
+      await sbChannel.track({clientId,name,joinedAt:new Date().toISOString()});
+      settled=true;clearTimeout(timer);resolve(true);
+     }catch(e){settled=true;clearTimeout(timer);reject(e)}
+    }else if((state==="CHANNEL_ERROR"||state==="TIMED_OUT"||state==="CLOSED")&&!settled){settled=true;clearTimeout(timer);reject(new Error(state))}
+   });
+  });
+  if(!result)return;
+  joined=true;showActive();history.replaceState({},"",roomLink());setStatus("به اتاق وصل شدی");
+  $("callNotice").textContent="اتاق آماده است. لینک دعوت را برای دوستت بفرست.";
+  // Presence sync can fire before joined becomes true, so check the room once now.
+  const state=sbChannel.presenceState();const ids=[...new Set(Object.values(state).flat().filter(p=>p&&p.clientId).map(p=>p.clientId))].sort();
+  initiator=ids[0]===clientId;
+  if(ids.some(id=>id!==clientId)){remoteReady=true;await startPeer()}
+ }catch(e){console.error(e);setStatus("اتصال ناموفق");alert("اتصال به Supabase انجام نشد. آدرس پروژه، کلید anon، اینترنت و فعال‌بودن Realtime را بررسی کن.");if(sbChannel&&supabaseClient)try{await supabaseClient.removeChannel(sbChannel)}catch{}sbChannel=null;joined=false;}
+}
+async function startPeer(){
+ if(pc||!remoteReady)return;
+ try{
+  pc=new RTCPeerConnection({iceServers:ICE_SERVERS});
+  pc.onicecandidate=e=>{if(e.candidate)sendSignal({type:"ice",candidate:e.candidate})};
+  pc.ontrack=e=>{
+   let stream=e.streams&&e.streams[0];
+   if(!stream){stream=$("remoteVideo").srcObject||new MediaStream();if(!stream.getTracks().some(t=>t.id===e.track.id))stream.addTrack(e.track)}
+   $("remoteVideo").srcObject=stream;
+   $("remoteVideo").play().catch(()=>{});
+   $("remotePlaceholder").classList.add("hidden");setStatus("تصویر/صدای طرف مقابل دریافت شد");
+  };
+  pc.onconnectionstatechange=()=>{
+   if(!pc)return;
+   if(pc.connectionState==="connected"){setStatus("تماس برقرار شد");$("callNotice").textContent="اتصال برقرار است. اگر تصویر نمی‌بینی، دوربین طرف مقابل باید روشن باشد."}
+   else if(pc.connectionState==="failed"){$("callNotice").textContent="اتصال مستقیم برقرار نشد. احتمالاً این شبکه به TURN نیاز دارد."}
+   else if(pc.connectionState==="disconnected"){setStatus("ارتباط ناپایدار است")}
+  };
+  pc.ondatachannel=e=>setupDataChannel(e.channel);
+  pc.onnegotiationneeded=async()=>{
+   try{
+    makingOffer=true;
+    await pc.setLocalDescription();
+    sendSignal({type:pc.localDescription.type,sdp:pc.localDescription});
+   }catch(e){console.error("Negotiation failed",e)}
+   finally{makingOffer=false}
+  };
+  if(localStream)localStream.getTracks().forEach(t=>{if(t.readyState==="live"&&!pc.getSenders().some(s=>s.track&&s.track.id===t.id))pc.addTrack(t,localStream)});
+  if(initiator){dc=pc.createDataChannel("hamseda-data");setupDataChannel(dc)}
+ }catch(e){console.error(e);setStatus("خطا در تماس")}
+}
+function setupDataChannel(channel){
+ dc=channel;dc.binaryType="arraybuffer";
+ dc.onopen=()=>{setStatus("چت و اتصال آماده است");setControls(true);$("callNotice").textContent="اتصال برقرار است. پیام بده یا فایل بفرست."};
+ dc.onclose=()=>setControls(false);
+ dc.onmessage=e=>handleData(e.data);
+}
+async function onDescription(m){
+ if(!pc){remoteReady=true;await startPeer()}
+ if(!pc)return;
+ try{
+  const description=m.sdp;
+  const readyForOffer=!makingOffer&&(pc.signalingState==="stable"||isSettingRemoteAnswerPending);
+  const offerCollision=description.type==="offer"&&!readyForOffer;
+  ignoreOffer=initiator&&offerCollision;
+  if(ignoreOffer)return;
+  isSettingRemoteAnswerPending=description.type==="answer";
+  if(offerCollision)await pc.setLocalDescription({type:"rollback"});
+  await pc.setRemoteDescription(description);
+  isSettingRemoteAnswerPending=false;
+  for(const c of pendingCandidates.splice(0)){try{await pc.addIceCandidate(c)}catch(e){if(!ignoreOffer)console.warn(e)}}
+  if(description.type==="offer"){
+   await pc.setLocalDescription();
+   sendSignal({type:pc.localDescription.type,sdp:pc.localDescription});
+  }
+ }catch(e){isSettingRemoteAnswerPending=false;console.error("Remote description failed",e)}
+}
+async function onIce(m){
+ if(!pc||!pc.remoteDescription){pendingCandidates.push(m.candidate);return}
+ try{await pc.addIceCandidate(m.candidate)}catch(e){if(!ignoreOffer)console.warn("ICE candidate failed",e)}
+}
+async function ensureMedia(kind){
+ try{
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("مرورگر برای دسترسی به دوربین/میکروفون باید از HTTPS یا localhost باز شده باشد.");return false}
+  const wantAudio=kind==="audio"||kind==="both";
+  const wantVideo=kind==="video"||kind==="both";
+  const needAudio=wantAudio&&!(localStream&&localStream.getAudioTracks().some(t=>t.readyState==="live"));
+  const needVideo=wantVideo&&!(localStream&&localStream.getVideoTracks().some(t=>t.readyState==="live"));
+  if(needAudio||needVideo){
+   const fresh=await navigator.mediaDevices.getUserMedia({audio:needAudio,video:needVideo?{width:{ideal:1280},height:{ideal:720},facingMode:"user"}:false});
+   if(!localStream)localStream=new MediaStream();
+   fresh.getTracks().forEach(track=>{
+    localStream.addTrack(track);
+    if(pc)pc.addTrack(track,localStream);
+   });
+  }
+  $("localVideo").srcObject=screenStream||localStream;
+  $("localVideo").play().catch(()=>{});
+  $("localPlaceholder").classList.add("hidden");
+  return true;
+ }catch(e){console.error(e);alert("دسترسی به میکروفون یا دوربین داده نشد. مجوز مرورگر و اتصال امن (HTTPS یا localhost) را بررسی کن.");return false}
+}
+$("createBtn").onclick=()=>{const id=randomRoom();$("roomInput").value=id;history.replaceState({}, "", "?room="+id);connectRoom(id)};
+$("joinBtn").onclick=()=>{const id=$("roomInput").value.trim()||new URL(location.href).searchParams.get("room");if(!id){alert("کد اتاق را وارد کن یا لینک دعوت را باز کن.");return}connectRoom(id)};
+$("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText(roomLink());$("copyBtn").textContent="کپی شد ✓";setTimeout(()=>$("copyBtn").textContent="کپی لینک دعوت",1400)}catch{prompt("این لینک را برای دوستت بفرست:",roomLink())}};
+$("leaveBtn").onclick=async()=>{joined=false;if(sbChannel&&supabaseClient){try{await sbChannel.untrack();await supabaseClient.removeChannel(sbChannel)}catch(e){console.warn(e)}}sbChannel=null;if(pc)pc.close();if(dc)dc.close();if(localStream)localStream.getTracks().forEach(t=>t.stop());if(screenStream)screenStream.getTracks().forEach(t=>t.stop());location.href=location.pathname};
+$("micBtn").onclick=async()=>{
+ if(!await ensureMedia("audio"))return;
+ const t=localStream.getAudioTracks()[0];if(t){t.enabled=!t.enabled;$("micBtn").textContent=t.enabled?"🎙 میکروفون":"🔇 میکروفون خاموش";$("micBtn").classList.toggle("control-off",!t.enabled)}
+};
+$("cameraBtn").onclick=async()=>{
+ if(!await ensureMedia("video"))return;
+ const t=localStream.getVideoTracks()[0];if(t){t.enabled=!t.enabled;$("cameraBtn").textContent=t.enabled?"📷 دوربین روشن":"🚫 دوربین خاموش";$("cameraBtn").classList.toggle("control-off",!t.enabled)}
+};
+$("screenBtn").onclick=async()=>{
+ try{
+  if(screenStream){
+   screenStream.getTracks().forEach(t=>t.stop());screenStream=null;screenTrack=null;
+   $("localVideo").srcObject=localStream;$("localVideo").play().catch(()=>{});
+   const cam=localStream?.getVideoTracks()[0];const sender=pc?.getSenders().find(s=>s.track&&s.track.kind==="video");
+   if(sender&&cam)await sender.replaceTrack(cam);
+   $("screenBtn").textContent="▣ اشتراک صفحه";return;
+  }
+  if(!navigator.mediaDevices?.getDisplayMedia){alert("اشتراک صفحه در این مرورگر پشتیبانی نمی‌شود. از نسخهٔ جدید Chrome یا Edge و HTTPS/localhost استفاده کن.");return}
+  screenStream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:{ideal:15,max:30}},audio:false});
+  screenTrack=screenStream.getVideoTracks()[0];
+  const sender=pc?.getSenders().find(s=>s.track&&s.track.kind==="video");
+  if(sender)await sender.replaceTrack(screenTrack);
+  else if(pc)pc.addTrack(screenTrack,screenStream);
+  $("localVideo").srcObject=screenStream;$("localVideo").play().catch(()=>{});
+  $("localPlaceholder").classList.add("hidden");$("screenBtn").textContent="■ توقف اشتراک";
+  screenTrack.onended=async()=>{
+   screenStream=null;screenTrack=null;$("localVideo").srcObject=localStream;$("localVideo").play().catch(()=>{});
+   const cam=localStream?.getVideoTracks()[0];const s=pc?.getSenders().find(x=>x.track&&x.track.kind==="video");
+   if(s&&cam)try{await s.replaceTrack(cam)}catch{}
+   $("screenBtn").textContent="▣ اشتراک صفحه";
+  };
+ }catch(e){console.error(e);alert("اشتراک صفحه شروع نشد. در پنجرهٔ مرورگر «کل صفحه» یا پنجرهٔ موردنظر را انتخاب کن.")}
+};
+$("chatForm").onsubmit=e=>{e.preventDefault();const text=$("chatInput").value.trim();if(!text||!dc||dc.readyState!=="open")return;sendObject({kind:"text",text,name});addMsg(text,name,true);$("chatInput").value=""};
+function sendObject(obj){if(dc&&dc.readyState==="open")dc.send(JSON.stringify(obj))}
+$("fileInput").onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;if(!dc||dc.readyState!=="open"){alert("ابتدا اتصال دوستت را برقرار کن.");return}
+ if(file.size>20*1024*1024){alert("در این نسخه حداکثر حجم هر فایل ۲۰ مگابایت است.");e.target.value="";return}
+ const id=String(++fileSendId), total=Math.ceil(file.size/chunkSize);
+ sendObject({kind:"file-start",id,name:file.name,size:file.size,mime:file.type||"application/octet-stream",total,from:name});
+ $("fileList").textContent="در حال ارسال "+file.name+"...";
+ for(let i=0;i<total;i++){
+  while(dc&&dc.readyState==="open"&&dc.bufferedAmount>1024*1024)await new Promise(r=>setTimeout(r,40));
+  if(!dc||dc.readyState!=="open")break;
+  const buf=await file.slice(i*chunkSize,Math.min(file.size,(i+1)*chunkSize)).arrayBuffer();
+  const header=new TextEncoder().encode(JSON.stringify({kind:"file-chunk",id,index:i})+"\n");
+  const packet=new Uint8Array(header.length+buf.byteLength);packet.set(header);packet.set(new Uint8Array(buf),header.length);dc.send(packet);
+ }
+ sendObject({kind:"file-end",id});$("fileList").textContent="ارسال شد: "+file.name;addMsg("فایل ارسال شد: "+file.name,name,true);e.target.value="";
+};
+function handleData(data){
+ if(typeof data==="string"){
+  let m;try{m=JSON.parse(data)}catch{return}
+  if(m.kind==="text")addMsg(m.text,m.name||"دوستت");
+  if(m.kind==="file-start"){fileReceive={id:m.id,name:m.name,size:m.size,mime:m.mime,total:m.total,chunks:[]};$("fileList").textContent="دریافت فایل: "+m.name}
+  if(m.kind==="file-end"&&fileReceive&&fileReceive.id===m.id){
+   const blob=new Blob(fileReceive.chunks,{type:fileReceive.mime});const url=URL.createObjectURL(blob);
+   const a=document.createElement("a");a.href=url;a.download=fileReceive.name;a.textContent="دانلود "+fileReceive.name;a.style.display="inline-block";a.style.color="#c9c1ff";a.style.margin="6px";
+   $("fileList").appendChild(a);addMsg("فایل آمادهٔ دانلود است: "+fileReceive.name,"هم‌صدا");fileReceive=null;
+  }
+  return;
+ }
+ if(data instanceof ArrayBuffer){
+  const u=new Uint8Array(data);let sep=-1;for(let i=0;i<Math.min(u.length,500);i++)if(u[i]===10){sep=i;break}
+  if(sep<0)return;let meta;try{meta=JSON.parse(new TextDecoder().decode(u.slice(0,sep)))}catch{return}
+  if(meta.kind==="file-chunk"&&fileReceive&&fileReceive.id===meta.id)fileReceive.chunks[meta.index]=u.slice(sep+1);
+ }
+}
+const initialRoom=new URL(location.href).searchParams.get("room");if(initialRoom){$("roomInput").value=initialRoom;$("callNotice").textContent="لینک دعوت باز شده است؛ برای ورود روی «پیوستن به اتاق» بزن."}
+})();
+</script>
+</body>
+</html>
